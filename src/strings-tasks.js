@@ -171,9 +171,15 @@ repeatString('abc', -2);
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(/* d  */) {
-  throw new Error('Not implemented');
+function removeFirstOccurrences(str, value) {
+  const index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
+
+removeFirstOccurrences('To be or not to be', 'be');
 
 /**
  * Remove the last occurrence of a substring from a string.
@@ -210,14 +216,17 @@ removeLastOccurrences('I like legends', 'end');
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes() {
-  throw new Error('Not implemented');
-  // let charCodeSum = 0;
-  // for (let i = 0; i < str.length; i += 1) {
-  //   charCodeSum += str.charCodeAt(i);
-  // }
-  // return charCodeSum;
+function sumOfCodes(str) {
+  if (typeof str !== 'string') {
+    return 0;
+  }
+  let sum = 0;
+  for (let i = 0; i < str.length; i += 1) {
+    sum += str.charCodeAt(i);
+  }
+  return sum;
 }
+sumOfCodes('My String');
 
 /**
  * Checks if a string starts with a specific substring.
@@ -364,9 +373,12 @@ countVowels('XYZ');
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  const cleanStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+  return cleanStr === cleanStr.split('').reverse().join('');
 }
+isPalindrome('madam');
+
 //   const cleanStr = str.replace(/[^a-z0-9]/g, '').toLocaleLowerCase();
 
 //   return cleanStr === cleanStr.split('').reverse().join('');
@@ -530,12 +542,12 @@ function extractEmails(/* a */) {
  *
  */
 function encodeToRot13(str) {
-  return str.replace(/[a-zA-Z]/g, function (char) {
-    const offset = char <= 'Z' ? 65 : 97;
-    return String.fromCharCode(
-      ((char.charCodeAt(0) - offset + 13) % 26) + offset
-    );
-  });
+  const originalAlpha = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  const cipher = 'nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM';
+  return str.replace(
+    /[a-z]/gi,
+    (letter) => cipher[originalAlpha.indexOf(letter)]
+  );
 }
 encodeToRot13('hello');
 /**
