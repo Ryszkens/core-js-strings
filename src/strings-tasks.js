@@ -144,9 +144,20 @@ removeTrailingWhitespaces('ania   ');
  *   repeatString('', 3) => ''
  *   repeatString('abc', -2) => ''
  */
-function repeatString() {
-  throw new Error('Not implemented');
+function repeatString(str, times) {
+  if (typeof times !== 'number' || times < 0) {
+    return '';
+  }
+  if (String.prototype.repeat) {
+    return str.repeat(times);
+  }
+  let result = '';
+  for (let i = 0; i < times; i += 1) {
+    result += str;
+  }
+  return result;
 }
+repeatString('abc', -2);
 // repeatString('ania', 3);
 /**
  * Remove the first occurrence of a substring from a string.
@@ -333,12 +344,12 @@ containsSubstring('Hello, World!', 'World');
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(/* str */) {
-  throw new Error('Not implemented');
-  // const vowelRegex = /[aeiou]/gi;
-  // const matches = str.match(vowelRegex);
-  // return matches ? matches.length : 0;
+function countVowels(str) {
+  const vowel = ['a', 'e', 'i', 'o', 'u', 'y', 'A', 'E', 'O', 'U', 'Y'];
+  const vowelArray = Array.from(str).filter((char) => vowel.includes(char));
+  return vowelArray.length;
 }
+countVowels('XYZ');
 
 /**
  * Returns true if the string is a palindrome; otherwise false.
@@ -356,6 +367,10 @@ function countVowels(/* str */) {
 function isPalindrome(/* str */) {
   throw new Error('Not implemented');
 }
+//   const cleanStr = str.replace(/[^a-z0-9]/g, '').toLocaleLowerCase();
+
+//   return cleanStr === cleanStr.split('').reverse().join('');
+// }
 
 /**
  * Find the longest word in the sentence. If there are multiple longest words,
@@ -446,9 +461,16 @@ function getStringFromTemplate(/* firstName, lastName */) {
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(/* value */) {
-  throw new Error('Not implemented');
+function extractNameFromTemplate(value) {
+  const regex = /Hello, (.+?)!/;
+  const match = value.match(regex);
+
+  if (match && match[1]) {
+    return match[1];
+  }
+  return null;
 }
+extractNameFromTemplate('Hello, John Doe!');
 
 /**
  * Remove the first and last angle brackets from tag string
@@ -461,9 +483,16 @@ function extractNameFromTemplate(/* value */) {
  *   unbracketTag('<span>') => 'span'
  *   unbracketTag('<a>') => 'a'
  */
-function unbracketTag(/* str */) {
-  throw new Error('Not implemented');
+function unbracketTag(str) {
+  const regex = /^<(.+?)>$/;
+  const match = str.match(regex);
+
+  if (match && match[1]) {
+    return match[1];
+  }
+  return null;
 }
+unbracketTag('<div>');
 
 /**
  * Extracts e-mails from single string with e-mails list delimited by semicolons
@@ -480,7 +509,7 @@ function unbracketTag(/* str */) {
  *   ],
  *   'info@gmail.com' => ['info@gmail.com']
  */
-function extractEmails(/* str */) {
+function extractEmails(/* a */) {
   throw new Error('Not implemented');
 }
 
@@ -500,10 +529,15 @@ function extractEmails(/* str */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  return str.replace(/[a-zA-Z]/g, function (char) {
+    const offset = char <= 'Z' ? 65 : 97;
+    return String.fromCharCode(
+      ((char.charCodeAt(0) - offset + 13) % 26) + offset
+    );
+  });
 }
-
+encodeToRot13('hello');
 /**
  * Returns playid card id.
  *
@@ -528,9 +562,65 @@ function encodeToRot13(/* str */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
+function getCardId(value) {
+  const deck = [
+    'A♣',
+    '2♣',
+    '3♣',
+    '4♣',
+    '5♣',
+    '6♣',
+    '7♣',
+    '8♣',
+    '9♣',
+    '10♣',
+    'J♣',
+    'Q♣',
+    'K♣',
+    'A♦',
+    '2♦',
+    '3♦',
+    '4♦',
+    '5♦',
+    '6♦',
+    '7♦',
+    '8♦',
+    '9♦',
+    '10♦',
+    'J♦',
+    'Q♦',
+    'K♦',
+    'A♥',
+    '2♥',
+    '3♥',
+    '4♥',
+    '5♥',
+    '6♥',
+    '7♥',
+    '8♥',
+    '9♥',
+    '10♥',
+    'J♥',
+    'Q♥',
+    'K♥',
+    'A♠',
+    '2♠',
+    '3♠',
+    '4♠',
+    '5♠',
+    '6♠',
+    '7♠',
+    '8♠',
+    '9♠',
+    '10♠',
+    'J♠',
+    'Q♠',
+    'K♠',
+  ];
+  const res = deck.indexOf(value);
+  return res;
 }
+getCardId('9♣');
 
 module.exports = {
   getStringLength,
