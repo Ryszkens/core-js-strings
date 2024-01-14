@@ -144,11 +144,10 @@ removeTrailingWhitespaces('ania   ');
  *   repeatString('', 3) => ''
  *   repeatString('abc', -2) => ''
  */
-function repeatString(str, times) {
-  const res = str;
-  return res.repeat(times);
+function repeatString() {
+  throw new Error('Not implemented');
 }
-repeatString('ania', 3);
+// repeatString('ania', 3);
 /**
  * Remove the first occurrence of a substring from a string.
  *
@@ -161,10 +160,10 @@ repeatString('ania', 3);
  *   removeFirstOccurrences('I like legends', 'end') => 'I like legs'.
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
-function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
+function removeFirstOccurrences(/* d  */) {
+  throw new Error('Not implemented');
 }
-removeFirstOccurrences('I like legends', 'like');
+
 /**
  * Remove the last occurrence of a substring from a string.
  *
@@ -200,16 +199,14 @@ removeLastOccurrences('I like legends', 'end');
  *   sumOfCodes('') => 0
  *   sumOfCodes() => 0
  */
-function sumOfCodes(str) {
-  let charCodeSum = 0;
-
-  for (let i = 0; i < str.length; i += 1) {
-    charCodeSum += str.charCodeAt(i);
-  }
-
-  return charCodeSum;
+function sumOfCodes() {
+  throw new Error('Not implemented');
+  // let charCodeSum = 0;
+  // for (let i = 0; i < str.length; i += 1) {
+  //   charCodeSum += str.charCodeAt(i);
+  // }
+  // return charCodeSum;
 }
-sumOfCodes('12345');
 
 /**
  * Checks if a string starts with a specific substring.
@@ -336,12 +333,12 @@ containsSubstring('Hello, World!', 'World');
  *   countVowels('aEiOu') => 5
  *   countVowels('XYZ') => 1
  */
-function countVowels(str) {
-  const vowelRegex = /[aeiou]/gi;
-  const matches = str.match(vowelRegex);
-  return matches ? matches.length : 0;
+function countVowels(/* str */) {
+  throw new Error('Not implemented');
+  // const vowelRegex = /[aeiou]/gi;
+  // const matches = str.match(vowelRegex);
+  // return matches ? matches.length : 0;
 }
-countVowels('apple');
 
 /**
  * Returns true if the string is a palindrome; otherwise false.
@@ -356,14 +353,10 @@ countVowels('apple');
  *   isPalindrome('apple') => false
  *   isPalindrome('No lemon, no melon') => true
  */
-function isPalindrome(str) {
-  const value1 = str.split('').reverse().join('');
-  if (value1 === str) {
-    return true;
-  }
-  return false;
+function isPalindrome(/* str */) {
+  throw new Error('Not implemented');
 }
-isPalindrome('madams');
+
 /**
  * Find the longest word in the sentence. If there are multiple longest words,
  * the function returns the first one encountered.
@@ -438,10 +431,11 @@ invertCase('Hello, World!');
  *   getStringFromTemplate('John','Doe') => 'Hello, John Doe!'
  *   getStringFromTemplate('Chuck','Norris') => 'Hello, Chuck Norris!'
  */
-function getStringFromTemplate(firstName, lastName) {
-  return `Hello, ${firstName} ${lastName}`;
+function getStringFromTemplate(/* firstName, lastName */) {
+  throw new Error('Not implemented');
+  // return `Hello ${firstName} ${lastName}`;
 }
-getStringFromTemplate('John', 'Doe');
+
 /**
  * Extracts a name from template string 'Hello, First_Name Last_Name!'.
  *
@@ -452,7 +446,7 @@ getStringFromTemplate('John', 'Doe');
  *   extractNameFromTemplate('Hello, John Doe!') => 'John Doe'
  *   extractNameFromTemplate('Hello, Chuck Norris!') => 'Chuck Norris'
  */
-function extractNameFromTemplate(value) {
+function extractNameFromTemplate(/* value */) {
   throw new Error('Not implemented');
 }
 
